@@ -5,9 +5,9 @@ import Document, {
   Main,
   NextScript,
 } from 'next/document';
-import { ServerStyleSheet } from 'styled-components';
+import { ServerStyleSheet } from '@xstyled/styled-components';
 
-class MyDocument extends Document {
+export default class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
     const sheet = new ServerStyleSheet();
     const originalRenderPage = ctx.renderPage;
@@ -37,9 +37,7 @@ class MyDocument extends Document {
   render() {
     return (
       <Html>
-        <Head>
-          <meta name='theme-color' key='theme-color' content='#000000' />
-        </Head>
+        <Head />
         <body>
           <Main />
           <NextScript />
@@ -48,5 +46,3 @@ class MyDocument extends Document {
     );
   }
 }
-
-export default MyDocument;

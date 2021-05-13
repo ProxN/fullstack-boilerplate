@@ -1,12 +1,12 @@
 import { AppProps } from 'next/app';
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider, Preflight } from '@xstyled/styled-components';
 import { Theme } from '@lib/theme';
-import { GlobalStyles, ResetStyles } from '@lib/styles';
+import { GlobalStyles } from '@lib/styles';
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
     <ThemeProvider theme={Theme}>
-      <ResetStyles />
+      <Preflight />
       <GlobalStyles />
       <Component {...pageProps} />
     </ThemeProvider>

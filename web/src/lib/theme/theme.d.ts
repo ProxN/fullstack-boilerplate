@@ -1,8 +1,9 @@
 import 'styled-components';
 import { Tuple } from '@lib/types/utility-types';
+import { SpaceType } from './space';
 
 export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-export type ThemeSize = Record<Size, string>;
+export type ThemeSize = Record<Size, string | number>;
 
 declare module 'styled-components' {
   export interface DefaultTheme {
@@ -11,10 +12,12 @@ declare module 'styled-components' {
     black: string;
     primary: string;
     lineHeight: string;
+    fontFamily: string;
     colors: Record<string, Tuple<string, 10>>;
-    radius: ThemeSize;
+    radii: ThemeSize;
     fontSizes: ThemeSize;
     shadows: ThemeSize;
-    fontFamily: string;
+    screens: ThemeSize;
+    space: SpaceType;
   }
 }
