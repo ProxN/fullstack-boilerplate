@@ -1,13 +1,20 @@
 import { DefaultTheme } from 'styled-components';
+import { defaultTheme } from '@xstyled/styled-components';
 import colors from './colors';
 import { space } from './space';
+import {
+  transitionDuration as durations,
+  timingFunctions,
+  transitionProperties,
+} from './transition';
 import screens from './breakpoints';
 
 const Theme: DefaultTheme = {
+  ...defaultTheme,
   colorMode: 'light',
   white: '#fff',
   black: '#000',
-  primary: 'red',
+  primary: 'blue',
   lineHeight: '1.5',
   fontFamily: `-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`,
@@ -39,6 +46,9 @@ const Theme: DefaultTheme = {
   colors,
   screens,
   space,
+  durations,
+  timingFunctions,
+  transitionProperties,
 };
 
 export default Theme;

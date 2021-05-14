@@ -50,6 +50,7 @@
         "@typescript-eslint/no-floating-promises":"off",
         "@typescript-eslint/unbound-method":"off",
         "no-nested-ternary":"off",
-        "@typescript-eslint/no-empty-interface":"off"
+        "@typescript-eslint/no-empty-interface":"off",
+        "import/prefer-default-export":"off"
     }
   }
