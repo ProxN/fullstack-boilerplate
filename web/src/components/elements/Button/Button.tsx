@@ -11,7 +11,7 @@ import {
 } from './Button.styles';
 import Loader from '../Loader';
 
-interface ButtonProps extends BaseButtonProps {
+export interface ButtonProps extends BaseButtonProps {
   /** if "true" set button to disbaled. */
   isDisabled?: boolean;
 
@@ -90,6 +90,7 @@ const Button = <C extends React.ElementType = 'button'>(
           display='flex'
           justifyContent='center'
           alignItems='center'
+          position='absolute'
           h='100%'
         >
           <Loader size='small' />

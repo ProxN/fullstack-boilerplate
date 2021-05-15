@@ -3,6 +3,8 @@ import Box from '@components/layout/Box';
 import Container from '@components/layout/Container';
 import Flex from '@components/layout/Flex';
 import Icon from '@components/elements/Icon';
+import Space from '@components/layout/Space';
+import IconButton from '@components/elements/IconButton';
 
 const Index = () => {
   return (
@@ -12,27 +14,22 @@ const Index = () => {
       <Container>This is container</Container>
       <Container mt={5}>
         <h1>Buttons</h1>
-        <Box>
+        <Space>
           <Button>Gray</Button>
-        </Box>
-        <Box mt={2}>
-          <Button isPrimary>Create account</Button>
-        </Box>
-        <Box mt={2}>
-          <Button isLoading isPrimary>
-            Create account
-          </Button>
-        </Box>
-        <Box mt={2}>
-          <Button leftIcon={<Icon name='close' />} isPrimary>
-            Create account
-          </Button>
-        </Box>
-        <Box mt={2}>
-          <Button rightIcon={<Icon name='close' />} isPrimary>
-            Create account
-          </Button>
-        </Box>
+          <Button color='orange'>Orange</Button>
+          <IconButton
+            ariaLabel='Close Button'
+            color='blue'
+            icon={<Icon name='close' />}
+          />
+          <IconButton
+            ariaLabel='Close Button'
+            isCircle
+            variant='light'
+            color='blue'
+            icon={<Icon name='close' />}
+          />
+        </Space>
       </Container>
     </div>
   );

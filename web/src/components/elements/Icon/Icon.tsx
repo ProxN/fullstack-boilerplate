@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import dynamic from 'next/dynamic';
 
 interface IconProps {
@@ -9,7 +9,8 @@ const DynamicIcon = (name: string) =>
   dynamic(() => import(`../../../assets/${name}.svg`));
 
 const Icon: React.FC<IconProps> = ({ name }) => {
-  const Ic = DynamicIcon(name);
+  const Ic = useMemo(() => DynamicIcon(name), [name]);
+
   if (!Ic) return null;
   return <Ic />;
 };

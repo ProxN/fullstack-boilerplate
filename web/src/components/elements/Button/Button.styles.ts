@@ -56,6 +56,7 @@ const BaseButton = styled.button<BaseButtonProps>`
   text-align: center;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   cursor: pointer;
   outline: none;
   position: relative;
