@@ -8,7 +8,7 @@ import styled, {
 
 export interface SpaceBaseProps {
   /** if "true", set flex-wrap:wrap */
-  wrap?: boolean;
+  $wrap?: boolean;
 
   /** horizontal space */
   hSize?: number;
@@ -19,7 +19,7 @@ export interface SpaceBaseProps {
 
 export const SpaceContainer = styled.div<SpaceBaseProps>`
   display: flex;
-  ${({ wrap }) => wrap && css({ flexWrap: wrap ? 'wrap' : 'nowrap' })}
+  ${({ $wrap }) => $wrap && css({ flexWrap: $wrap ? 'wrap' : 'nowrap' })}
   ${alignItems}
   ${justifyContent}
   ${flexDirection}
@@ -30,8 +30,8 @@ export const SpaceContainer = styled.div<SpaceBaseProps>`
         margin-right: ${getSpace(hSize)};
       `}
 
-    ${({ wrap, vSize }) =>
-      wrap &&
+    ${({ $wrap, vSize }) =>
+      $wrap &&
       vSize &&
       css`
         margin-bottom: ${getSpace(vSize)};

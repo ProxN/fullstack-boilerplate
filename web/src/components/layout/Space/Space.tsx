@@ -33,7 +33,7 @@ const getSpaceSize = (spaceSize: SpaceSize) => {
 
 const Space: React.FC<SpaceProps> = ({
   children,
-  wrap = false,
+  $wrap = false,
   size = 'sm',
   ...rest
 }) => {
@@ -44,7 +44,7 @@ const Space: React.FC<SpaceProps> = ({
   );
 
   return (
-    <SpaceContainer hSize={hSize} vSize={vSize} wrap={wrap} {...rest}>
+    <SpaceContainer hSize={hSize} vSize={vSize} $wrap={$wrap} {...rest}>
       {children}
     </SpaceContainer>
   );
