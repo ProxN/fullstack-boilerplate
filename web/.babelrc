@@ -1,12 +1,37 @@
 {
-  "presets": ["next/babel"],
-  "plugins": [ ["styled-components", {
-    "ssr": true,
-    "topLevelImportPaths": [
-      "@xstyled/styled-components",
-      "@xstyled/styled-components/no-tags",
-      "@xstyled/styled-components/native",
-      "@xstyled/styled-components/primitives"
+  "env": {
+    "development": {
+      "plugins": [
+        [
+          "babel-plugin-styled-components",
+          { "ssr": true, "displayName": true, "preprocess": false, 
+            "topLevelImportPaths": [
+            "@xstyled/styled-components"]
+           }
+        ]
+      ],
+      "presets": ["next/babel"]
+    },
+    "production": {
+      "plugins": [
+        [
+          "babel-plugin-styled-components",
+          { "ssr": true, "displayName": true, "preprocess": false,
+            "topLevelImportPaths": [
+              "@xstyled/styled-components"]
+          }
+        ]
+      ],
+      "presets": ["next/babel"]
+    }
+  },
+  "plugins": [
+    [
+      "babel-plugin-styled-components",
+      { "ssr": true, "displayName": true, "preprocess": false,
+        "topLevelImportPaths": [
+          "@xstyled/styled-components"]
+      }
     ]
-  }]]
+  ]
 }

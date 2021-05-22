@@ -1,6 +1,5 @@
 import styled, {
   compose,
-  createX,
   layout,
   LayoutProps,
   space,
@@ -13,12 +12,13 @@ interface ContainerProps extends LayoutProps, SpaceProps {
   fluid?: boolean;
 }
 
-const x = createX(compose(layout, space));
+const ContainerSystem = compose(layout, space);
 
-const XContainer = styled(x.div)<ContainerProps>`
+const XContainer = styled.div<ContainerProps>`
   ${({ fluid }) => fluid && css({ maxWidth: '100%' })};
   margin-left: auto;
   margin-right: auto;
+  ${ContainerSystem}
 `;
 
 const Container: React.FC<ContainerProps> = ({ fluid = false, ...rest }) => {
