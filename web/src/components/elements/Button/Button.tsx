@@ -1,6 +1,6 @@
+import { DefaultTheme } from 'styled-components';
 import { useTheme, x } from '@xstyled/styled-components';
 import { ComponentProps } from '@lib/types/utility-types';
-import { DefaultTheme } from 'styled-components';
 import {
   OutlineButton,
   LightButton,
@@ -9,7 +9,7 @@ import {
   LinkButton,
   ButtonIcon,
 } from './Button.styles';
-import Loader from '../Loader';
+import { Loader } from '../Loader';
 
 export interface ButtonProps extends BaseButtonProps {
   /** if "true" set button to disbaled. */

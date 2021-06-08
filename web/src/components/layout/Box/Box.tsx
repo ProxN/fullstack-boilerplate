@@ -1,6 +1,6 @@
 import styled, { system, SystemProps } from '@xstyled/styled-components';
 
-interface BoxProps extends SystemProps {
+export interface BoxProps extends SystemProps {
   color?: React.HTMLAttributes<HTMLDivElement>['color'];
 }
 

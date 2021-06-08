@@ -9,6 +9,18 @@ import {
 } from './transition';
 
 export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+
+export type FontSizes =
+  | Size
+  | '2xl'
+  | '3xl'
+  | '4xl'
+  | '5xl'
+  | '6xl'
+  | '7xl'
+  | '8xl'
+  | '9xl';
+
 export type ThemeSize = Record<Size, string | number>;
 
 declare module 'styled-components' {
@@ -20,8 +32,8 @@ declare module 'styled-components' {
     lineHeight: string;
     fontFamily: string;
     colors: Record<string, Tuple<string, 10>>;
+    fontSizes: Record<FontSizes, string | number>;
     radii: ThemeSize;
-    fontSizes: ThemeSize;
     shadows: ThemeSize;
     screens: ThemeSize;
     space: SpaceType;

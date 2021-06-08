@@ -51,6 +51,8 @@
         "@typescript-eslint/unbound-method":"off",
         "no-nested-ternary":"off",
         "@typescript-eslint/no-empty-interface":"off",
-        "import/prefer-default-export":"off"
+        "import/prefer-default-export":"off",
+        "react/require-default-props":"off",
+        "import/no-extraneous-dependencies":"off"
     }
   }
