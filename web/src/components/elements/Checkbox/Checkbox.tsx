@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import Icon from '../Icon';
+import { Icon } from '../Icon';
 import {
   CheckBoxWrapper,
   CheckBoxInput,

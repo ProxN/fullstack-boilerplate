@@ -1,4 +1,4 @@
-import { Wrapper, Required } from './InputWrapper.styles';
+import { Wrapper, Required, Label } from './InputWrapper.styles';
 import { Text } from '../Text';
 
 export interface InputWrapperProps {
@@ -28,11 +28,11 @@ const InputWrapper = ({
   return (
     <Wrapper>
       {label && (
-        <Text fontWeight={500} as='label' htmlFor={id}>
+        <Label htmlFor={id}>
           {label}
 
           {isRequired && <Required>*</Required>}
-        </Text>
+        </Label>
       )}
       {children}
       {error && <Text color='red'>{error}</Text>}

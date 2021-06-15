@@ -1,4 +1,4 @@
-import { ComponentProps } from '@lib/types/utility-types';
+import { forwardRef } from '@lib/utility/forwardRef';
 import {
   DefaultInput,
   FilledInput,
@@ -35,16 +35,13 @@ const getInput = (variant: string) => {
   return DefaultInput;
 };
 
-const Input = <C extends React.ElementType = 'input'>(
-  props: ComponentProps<C, InputProps>
-) => {
+const Input = forwardRef<InputProps, 'input'>((props, ref) => {
   const {
     isDisabled = false,
     isInvalid = false,
     isRequired = false,
     variant = 'default',
     borderRadius = 'sm',
-    radius = 'sm',
     icon,
     ...rest
   } = props;
@@ -53,12 +50,12 @@ const Input = <C extends React.ElementType = 'input'>(
 
   const input = (
     <StyledInput
-      radius={radius}
       required={isRequired}
       aria-invalid={isInvalid}
       aria-required={isRequired}
       isInvalid={isInvalid}
       disabled={isDisabled}
+      ref={ref}
       borderRadius={borderRadius}
       {...rest}
     />
@@ -74,6 +71,6 @@ const Input = <C extends React.ElementType = 'input'>(
   }
 
   return input;
-};
+});
 
 export default Input;

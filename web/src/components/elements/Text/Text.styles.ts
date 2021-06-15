@@ -15,6 +15,7 @@ import styled, {
   css,
   th,
 } from '@xstyled/styled-components';
+import { mode } from '@lib/utility/component';
 
 const TextSystem = compose(
   textAlign,
@@ -40,8 +41,14 @@ export interface TextBaseProps
 }
 
 const LinkStyles = css`
-  color: blue.6;
+  color: ${({ theme }) =>
+    mode(
+      theme.colors[theme.primary][6],
+      theme.colors[theme.primary][4]
+    )(theme.colorMode)};
   text-decoration: none;
+  cursor: pointer;
+  font-weight: 600;
   :hover {
     text-decoration: underline;
   }
@@ -52,8 +59,8 @@ export const TextDiv = styled.div.withConfig({
     validate(props) && !TextSystem.meta.props.includes(props),
 })<TextBaseProps>`
   ${TextSystem};
-  color: ${({ theme, color }) =>
-    color ? theme.colors[color][6] : theme.black};
+  color: ${({ color, theme }) =>
+    color ? mode(`${color}.6`, `${color}.4`)(theme.colorMode) : 'inherit'};
   font-family: ${th('fontFamily')};
   ${({ isLink }) => isLink && LinkStyles}
 `;

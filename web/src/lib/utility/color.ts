@@ -8,6 +8,10 @@ export const lighten = (color: string, by: number) => {
   return Color(color).lighten(by).rgb().string();
 };
 
+export const transparentize = (color: string, opacity: number) => {
+  return Color(color).alpha(opacity).rgb().string();
+};
+
 export const getColor = (
   palette: { [key: string]: string[] },
   key: string,

@@ -14,7 +14,7 @@ const Theme: DefaultTheme = {
   colorMode: 'light',
   white: '#fff',
   black: '#000',
-  primary: 'blue',
+  primary: 'violet',
   lineHeight: '1.5',
   fontFamily: `-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`,

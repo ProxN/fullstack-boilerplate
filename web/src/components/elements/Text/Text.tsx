@@ -1,14 +1,12 @@
 import { FontSizes } from '@lib/theme/theme';
-import { ComponentProps } from '@lib/types/utility-types';
+import { forwardRef } from '@lib/utility/forwardRef';
 import { TextDiv, TextBaseProps } from './Text.styles';
 
 export interface TextProps extends Omit<TextBaseProps, 'fontSize'> {
   size?: FontSizes | number | Record<string, string>;
 }
 
-const Text = <C extends React.ElementType = 'div'>(
-  props: ComponentProps<C, TextProps>
-) => {
+const Text = forwardRef<TextProps, 'div'>((props, ref) => {
   const {
     size = 'sm',
     isLink = false,
@@ -20,6 +18,7 @@ const Text = <C extends React.ElementType = 'div'>(
 
   return (
     <TextDiv
+      ref={ref}
       isLink={isLink}
       fontWeight={fontWeight}
       fontSize={size}
@@ -29,6 +28,6 @@ const Text = <C extends React.ElementType = 'div'>(
       {children}
     </TextDiv>
   );
-};
+});
 
 export default Text;

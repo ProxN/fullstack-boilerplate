@@ -6,7 +6,8 @@ import styled, {
   SpaceProps,
 } from '@xstyled/styled-components';
 import { Size } from '@lib/theme';
-import { getColor, isLight } from '@lib/utility/color';
+import { getColor, transparentize } from '@lib/utility/color';
+import { mode } from '@lib/utility/component';
 
 export interface BaseButtonProps {
   /**  button size */
@@ -28,7 +29,7 @@ const sizes = {
     padding: '0 .7rem',
   },
   md: {
-    height: '3.2rem',
+    height: '3.6rem',
     padding: '.4rem 1.5rem',
   },
   lg: {
@@ -52,8 +53,10 @@ const BaseButton = styled.button<BaseButtonProps>`
   user-select: none;
   border: 1px solid transparent;
   line-height: 1.54;
+  font-weight: 600;
   appearance: none;
   text-align: center;
+  color: inherit;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -82,50 +85,78 @@ const BaseButton = styled.button<BaseButtonProps>`
 export const SolidButton = styled(BaseButton)<BaseButtonProps>`
   ${({ color, theme }) => {
     if (!color) return css``;
-    const col = getColor(theme.colors, color, 6);
     return css`
-      background: ${col};
-      color: ${isLight(col) ? theme.black : theme.white};
-      border-color: ${col};
-
+      background-color: ${mode(`${color}.6`, `${color}.2`)(theme.colorMode)};
+      color: ${mode('white', 'gray.8')(theme.colorMode)};
       :hover:not(:disabled) {
-        background: ${getColor(theme.colors, color, 7)};
+        background-color: ${mode(`${color}.7`, `${color}.3`)(theme.colorMode)};
       }
 
       :active:not(:disabled) {
-        background: ${getColor(theme.colors, color, 8)};
+        background-color: ${mode(`${color}.8`, `${color}.4`)(theme.colorMode)};
       }
 
       :disabled {
         opacity: 0.6;
         border-color: transparent;
-        background: ${getColor(theme.colors, color, 5)};
+        background-color: ${mode(`${color}.6`, `${color}.2`)(theme.colorMode)};
       }
     `;
   }}
 `;
 
-export const OutlineButton = styled(BaseButton)<BaseButtonProps>`
+export const GhostButton = styled(BaseButton)<BaseButtonProps>`
   ${({ color, theme }) => {
     if (!color) return css``;
-    const col = getColor(theme.colors, color, 6);
+
+    if (color === 'gray') {
+      return css`
+        background-color: transparent;
+        color: ${mode('inherit', 'whiteAlpha.9')(theme.colorMode)};
+        border-color: transparent;
+
+        :hover:not(:disabled) {
+          background-color: ${mode('gray.1', 'whiteAlpha.2')(theme.colorMode)};
+        }
+
+        :active:not(:disabled) {
+          background-color: ${mode('gray.2', 'whiteAlpha.3')(theme.colorMode)};
+        }
+
+        :disabled {
+          opacity: 0.6;
+        }
+      `;
+    }
+    const c = getColor(theme.colors, color, 2);
+    const darkHoverBg = transparentize(c, 0.12);
+    const darkActiveBg = transparentize(c, 0.24);
     return css`
-      background: transparent;
-      color: ${col};
-      border-color: ${col};
+      background-color: transparent;
+      color: ${mode(`${color}.6`, `${color}.2`)(theme.colorMode)};
+      border-color: transparent;
 
       :hover:not(:disabled) {
-        background: ${getColor(theme.colors, color, 0)};
+        background-color: ${mode(`${color}.0`, darkHoverBg)(theme.colorMode)};
       }
 
       :active:not(:disabled) {
-        background: ${getColor(theme.colors, color, 1)};
+        background-color: ${mode(`${color}.1`, darkActiveBg)(theme.colorMode)};
       }
 
       :disabled {
-        opacity: 0.4;
-        background: transparent;
+        opacity: 0.6;
       }
+    `;
+  }}
+`;
+
+export const OutlineButton = styled(GhostButton)<BaseButtonProps>`
+  ${({ color, theme }) => {
+    if (!color) return css``;
+    const borderColor = mode('gray.3', 'whiteAlpha.3')(theme.colorMode);
+    return css`
+      border-color: ${color === 'gray' ? borderColor : 'currentColor'};
     `;
   }}
 `;
@@ -135,16 +166,16 @@ export const LightButton = styled(BaseButton)<BaseButtonProps>`
     if (!color) return css``;
     const col = getColor(theme.colors, color, 0);
     return css`
-      background: ${col};
+      background-color: ${col};
       color: ${getColor(theme.colors, color, 9)};
       border-color: ${col};
 
       :hover:not(:disabled) {
-        background: ${getColor(theme.colors, color, 1)};
+        background-color: ${getColor(theme.colors, color, 1)};
       }
 
       :active:not(:disabled) {
-        background: ${getColor(theme.colors, color, 2)};
+        background-color: ${getColor(theme.colors, color, 2)};
       }
 
       :disabled {
@@ -158,16 +189,18 @@ export const LinkButton = styled(BaseButton)<BaseButtonProps>`
   ${({ color, theme }) => {
     if (!color) return css``;
     return css`
-      background: transparent;
-      color: ${getColor(theme.colors, color, 6)};
+      background-color: transparent;
+      color: ${mode(`${color}.6`, `${color}.2`)(theme.colorMode)};
       border-color: transparent;
 
       &:not(:disabled):hover {
-        color: ${getColor(theme.colors, color, 5)};
+        text-decoration: underline;
+        color: ${mode(`${color}.7`, `${color}.3`)(theme.colorMode)};
       }
 
       &:not(:disabled):active {
         transform: none;
+        color: ${mode(`${color}.8`, `${color}.4`)(theme.colorMode)};
       }
 
       :disabled {

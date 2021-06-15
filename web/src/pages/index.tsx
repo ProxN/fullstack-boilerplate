@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Button } from '@components/elements/Button';
 import { Heading } from '@components/elements/Heading';
 import { Box } from '@components/layout/Box';
@@ -17,8 +18,16 @@ const Index = () => {
             Welcome to the Fullstack boilerplate
           </Heading>
           <Space mt='1rem' justifyContent='center'>
-            <Button variant='light'>Login</Button>
-            <Button color='violet'>Register</Button>
+            <Link href='/login'>
+              <Button as='a' variant='ghost'>
+                Log in
+              </Button>
+            </Link>
+            <Link href='/signup'>
+              <Button as='a' color='violet'>
+                Sign up
+              </Button>
+            </Link>
           </Space>
         </Box>
       </Center>

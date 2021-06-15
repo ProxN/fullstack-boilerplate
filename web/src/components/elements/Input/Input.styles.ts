@@ -1,5 +1,4 @@
 import styled, {
-  th,
   css,
   borderRadius,
   BorderRadiusProps,
@@ -9,6 +8,7 @@ import styled, {
   MaxWidthProps,
   compose,
 } from '@xstyled/styled-components';
+import { mode } from '@lib/utility/component';
 
 export interface InputBaseProps
   extends BorderRadiusProps,
@@ -31,14 +31,15 @@ const BaseInput = styled.input<InputBaseProps>`
   user-select: none;
   appearance: none;
   transition-property: border-color, background-color;
-  transition-duration: default;
+  transition-duration: slow;
   transition-timing-function: ease-in-out;
   line-height: 1.4;
   font-family: inherit;
   resize: none;
   font-size: sm;
-  padding: 0.6rem 1.2rem;
-  color: ${th('black')};
+  height: 4rem;
+  padding: 0 1.2rem;
+  color: inherit;
   ${inputSystem};
 
   &:disabled {
@@ -49,41 +50,67 @@ const BaseInput = styled.input<InputBaseProps>`
 `;
 
 export const DefaultInput = styled(BaseInput)`
-  border: 1px solid ${({ theme }) => theme.colors.gray[4]};
-  background-color: ${th('white')};
+  border: 1px solid transparent;
+  background-color: inherit;
 
-  &:not(:focus):not(:disabled):hover {
-    border-color: gray.5;
-  }
+  ${({ theme }) => css`
+    border-color: ${mode('gray.3', 'whiteAlpha.3')(theme.colorMode)};
 
-  &:focus {
-    outline: none;
-    border-color: ${({ theme }) => theme.colors[theme.primary][6]};
-  }
+    &:not(:focus):not(:disabled):hover {
+      border-color: ${mode('gray.4', 'whiteAlpha.4')(theme.colorMode)};
+    }
 
-  &::placeholder {
-    opacity: 0.5;
-  }
+    &:focus {
+      outline: none;
+      border-color: ${mode(
+        `${String(theme.primary)}.6`,
+        `${String(theme.primary)}.3`
+      )(theme.colorMode)};
+    }
 
-  ${({ isInvalid }) =>
+    &::placeholder {
+      color: ${mode('gray.5', 'whiteAlpha.4')(theme.colorMode)};
+    }
+  `}
+
+  ${({ isInvalid, theme }) =>
     isInvalid &&
     css`
-      color: red.6;
-      border-color: red.6 !important;
+      color: ${mode('red.6', 'red.3')(theme.colorMode)};
+      border-color: inherit;
 
-      &:hover {
-        border-color: red.6;
+      &:not(:focus):not(:disabled):hover {
+        border-color: ${mode('red.7', 'red.4')(theme.colorMode)};
+      }
+
+      &:focus {
+        border-color: ${mode('red.8', 'red.5')(theme.colorMode)};
       }
 
       &::placeholder {
         opacity: 1;
-        color: red.6;
+        color: inherit;
       }
     `}
 `;
 
 export const FilledInput = styled(BaseInput)`
-  background-color: gray.1;
+  ${({ theme }) => css`
+    background-color: ${mode('gray.1', 'whiteAlpha.0')(theme.colorMode)};
+
+    &:hover {
+      background-color: ${mode('gray.2', 'whiteAlpha.1')(theme.colorMode)};
+    }
+
+    &:focus {
+      outline: none;
+      border-color: ${mode(
+        `${String(theme.primary)}.6`,
+        `${String(theme.primary)}.3`
+      )(theme.colorMode)};
+    }
+  `};
+
   border: 1px solid;
   border-color: transparent;
 
@@ -91,24 +118,20 @@ export const FilledInput = styled(BaseInput)`
     opacity: 0.6;
   }
 
-  &:not(:focus):not(:disabled):hover {
-    background-color: gray.2;
-  }
-
-  &:focus {
-    outline: none;
-    border-color: ${({ theme }) => theme.colors[theme.primary][6]};
-  }
-
-  ${({ isInvalid }) =>
+  ${({ isInvalid, theme }) =>
     isInvalid &&
     css`
-      color: red.6;
-      border-color: red.6 !important;
-      background-color: red.0;
+      color: ${mode('red.6', 'red.3')(theme.colorMode)};
+      border-color: inherit;
+      background-color: red.1;
 
       &:hover {
-        border-color: red.6;
+        border-color: ${mode('red.7', 'red.4')(theme.colorMode)};
+        background-color: red.1;
+      }
+
+      &:focus {
+        border-color: ${mode('red.8', 'red.5')(theme.colorMode)};
       }
 
       &::placeholder {

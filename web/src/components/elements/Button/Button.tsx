@@ -1,6 +1,7 @@
+import React from 'react';
 import { DefaultTheme } from 'styled-components';
 import { useTheme, x } from '@xstyled/styled-components';
-import { ComponentProps } from '@lib/types/utility-types';
+import { forwardRef } from '@lib/utility/forwardRef';
 import {
   OutlineButton,
   LightButton,
@@ -8,6 +9,7 @@ import {
   BaseButtonProps,
   LinkButton,
   ButtonIcon,
+  GhostButton,
 } from './Button.styles';
 import { Loader } from '../Loader';
 
@@ -19,7 +21,7 @@ export interface ButtonProps extends BaseButtonProps {
   isPrimary?: boolean;
 
   /** Button appearance. */
-  variant?: 'solid' | 'outline' | 'link' | 'light';
+  variant?: 'solid' | 'outline' | 'link' | 'light' | 'ghost';
 
   /** Set button type attribute. */
   type?: 'submit' | 'button' | 'reset';
@@ -50,12 +52,14 @@ const getStyledButton = (variant: string) => {
     return LinkButton;
   }
 
+  if (variant === 'ghost') {
+    return GhostButton;
+  }
+
   return SolidButton;
 };
 
-const Button = <C extends React.ElementType = 'button'>(
-  props: ComponentProps<C, ButtonProps>
-) => {
+const Button = forwardRef<ButtonProps, 'button'>((props, ref) => {
   const {
     children,
     variant = 'solid',
@@ -67,6 +71,7 @@ const Button = <C extends React.ElementType = 'button'>(
     isPrimary = false,
     leftIcon,
     rightIcon,
+    onClick,
     loadingText,
     ...rest
   } = props;
@@ -77,9 +82,11 @@ const Button = <C extends React.ElementType = 'button'>(
 
   return (
     <StyledButton
+      ref={ref}
       disabled={isDisabled || isLoading}
       radius={radius}
       size={size}
+      onClick={onClick}
       color={isPrimary ? theme.primary : color}
       {...rest}
     >
@@ -104,6 +111,6 @@ const Button = <C extends React.ElementType = 'button'>(
       {rightIcon && <ButtonIcon ml={2}>{rightIcon}</ButtonIcon>}
     </StyledButton>
   );
-};
+});
 
 export default Button;

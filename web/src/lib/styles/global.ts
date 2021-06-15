@@ -1,4 +1,5 @@
 import { createGlobalStyle, css } from '@xstyled/styled-components';
+import { mode } from '@lib/utility/component';
 
 const GlobalStyles = createGlobalStyle`
   *,
@@ -26,8 +27,11 @@ const GlobalStyles = createGlobalStyle`
         font-weight:normal;
         line-height:1.35;
         ${({ theme }) => css`
-          background-color: ${theme.white};
-          color: ${theme.black};
+          background: ${mode(
+            theme.white,
+            theme.colors.dark[9]
+          )(theme.colorMode)};
+          color: ${mode('gray.8', 'whiteAlpha.9')(theme.colorMode)};
           font-size: ${theme.fontSizes.sm};
           font-family: ${theme.fontFamily};
         `};

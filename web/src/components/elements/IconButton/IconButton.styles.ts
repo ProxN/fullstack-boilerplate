@@ -1,5 +1,5 @@
 import styled, { css } from '@xstyled/styled-components';
-import Button from '../Button';
+import { Button } from '../Button';
 
 export interface IconButtonBaseProps {
   /** if "true",set button border radius to 50% */
@@ -27,6 +27,7 @@ const sizes = {
     height: '4rem',
     padding: '.6rem 0rem',
     width: '4rem',
+    fontSize: '2rem',
   },
 };
 

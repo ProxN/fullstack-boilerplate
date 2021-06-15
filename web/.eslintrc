@@ -53,6 +53,8 @@
         "@typescript-eslint/no-empty-interface":"off",
         "import/prefer-default-export":"off",
         "react/require-default-props":"off",
-        "import/no-extraneous-dependencies":"off"
+        "import/no-extraneous-dependencies":"off",
+        "@typescript-eslint/no-unsafe-member-access":"off",
+        "@typescript-eslint/no-unsafe-return":"off"
     }
   }
