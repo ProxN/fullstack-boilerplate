@@ -6,7 +6,10 @@ export interface BoxProps extends SystemProps {
   minW?: string | Record<string, string>;
 }
 
-const CustomBox = styled.div<BoxProps>`
+const CustomBox = styled.div.withConfig({
+  shouldForwardProp: (prop, validate) =>
+    validate(prop) && !system.meta.props.includes(prop),
+})<BoxProps>`
   ${system}
 `;
 

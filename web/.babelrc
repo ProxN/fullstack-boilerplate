@@ -16,7 +16,7 @@
       "plugins": [
         [
           "babel-plugin-styled-components",
-          { "ssr": true, "displayName": true, "preprocess": false,
+          { "ssr": true, "displayName": false, "preprocess": false,
             "topLevelImportPaths": [
               "@xstyled/styled-components"]
           }

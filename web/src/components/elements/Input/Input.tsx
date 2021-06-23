@@ -42,6 +42,7 @@ const Input = forwardRef<InputProps, 'input'>((props, ref) => {
     isRequired = false,
     variant = 'default',
     borderRadius = 'sm',
+    id,
     icon,
     ...rest
   } = props;
@@ -50,9 +51,11 @@ const Input = forwardRef<InputProps, 'input'>((props, ref) => {
 
   const input = (
     <StyledInput
+      id={id}
       required={isRequired}
       aria-invalid={isInvalid}
       aria-required={isRequired}
+      aria-describedby={`${id}-feedback`}
       isInvalid={isInvalid}
       disabled={isDisabled}
       ref={ref}

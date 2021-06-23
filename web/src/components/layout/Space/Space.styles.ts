@@ -38,7 +38,10 @@ const SpaceSystem = compose(
   flexDirection
 );
 
-export const SpaceContainer = styled.div<SpaceBaseProps>`
+export const SpaceContainer = styled.div.withConfig({
+  shouldForwardProp: (prop, validate) =>
+    validate(prop) && !SpaceSystem.meta.props.includes(prop),
+})<SpaceBaseProps>`
   display: flex;
   ${({ $wrap }) => $wrap && css({ flexWrap: $wrap ? 'wrap' : 'nowrap' })}
   ${SpaceSystem};

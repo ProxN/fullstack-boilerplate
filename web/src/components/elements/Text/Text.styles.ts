@@ -56,7 +56,7 @@ const LinkStyles = css`
 
 export const TextDiv = styled.div.withConfig({
   shouldForwardProp: (props, validate) =>
-    validate(props) && !TextSystem.meta.props.includes(props),
+    validate(props) && ![...TextSystem.meta.props, 'color'].includes(props),
 })<TextBaseProps>`
   ${({ color, theme }) => css`
     color: ${color

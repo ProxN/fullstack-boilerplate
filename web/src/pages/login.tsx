@@ -1,8 +1,9 @@
-import { Controller, useForm } from 'react-hook-form';
 import Router from 'next/router';
-import { useQueryClient } from 'react-query';
+import Head from 'next/head';
 import * as yup from 'yup';
 import toast from 'react-hot-toast';
+import { Controller, useForm } from 'react-hook-form';
+import { useQueryClient } from 'react-query';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { WithNoUser } from '@lib/utility/withNoUser';
 import { client } from '@lib/utility/graphqlClient';
@@ -47,6 +48,9 @@ const Login = () => {
 
   return (
     <AuthForm onSubmit={handleSubmit(onSubmit)} title='Log in.'>
+      <Head>
+        <title>Fullstack boilerplate - Login</title>
+      </Head>
       <Controller
         render={({ field, fieldState: { error, invalid } }) => (
           <TextInput

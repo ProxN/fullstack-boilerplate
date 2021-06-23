@@ -32,8 +32,10 @@ const App = (props: AppProps) => {
       <Preflight />
       <GlobalStyles />
       <QueryClientProvider client={queryClient}>
-        <Component {...pageProps} />
-        <ReactQueryDevtools />
+        <main>
+          <Component {...pageProps} />
+        </main>
+        {/* <ReactQueryDevtools /> */}
       </QueryClientProvider>
       <Box position='absolute' top={12} right={12}>
         <IconButton

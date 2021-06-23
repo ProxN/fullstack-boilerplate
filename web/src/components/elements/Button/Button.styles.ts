@@ -38,7 +38,10 @@ const sizes = {
   },
 };
 
-const BaseButton = styled.button<BaseButtonProps>`
+const BaseButton = styled.button.withConfig({
+  shouldForwardProp: (prop, validate) =>
+    validate(prop) && !['radius', 'color'].includes(prop),
+})<BaseButtonProps>`
   ${({ size }) => size && { ...sizes[size] }};
   ${({ radius, theme }) =>
     radius && css({ borderRadius: theme.radii[radius] })};

@@ -36,7 +36,7 @@ const InputWrapper = ({
       )}
       {children}
       {error && (
-        <Text color='red' mt={1}>
+        <Text color='red' aria-live='polite' id={`${id}-feedback`} mt={1}>
           {error}
         </Text>
       )}
