@@ -8,7 +8,7 @@ import User from '../user/user.entity';
 import { FieldError } from '../shared/errorResponse';
 import { UserResponse } from '../shared/user.response';
 import * as authErrors from './auth.errors';
-import { AuthInput } from './inputs/auth.input';
+import { LoginInputs, SignupInputs } from './inputs/auth.input';
 import { ForgotPassResponse } from './response';
 
 const validateAuth = (email: string, password: string) => {
@@ -25,7 +25,7 @@ const validateAuth = (email: string, password: string) => {
 class AuthResolver {
   @Mutation(() => UserResponse)
   async signup(
-    @Arg('data') data: AuthInput,
+    @Arg('data') data: SignupInputs,
     @Ctx() { req }: Context
   ): Promise<UserResponse> {
     let error: FieldError = checkEmpty(data);
@@ -40,10 +40,11 @@ class AuthResolver {
 
     let user;
     try {
-      const { email, password } = data;
+      const { email, password, name } = data;
       user = await User.create({
         email,
         password,
+        name,
       }).save();
 
       req.session.userId = user.id;
@@ -59,7 +60,7 @@ class AuthResolver {
 
   @Mutation(() => UserResponse)
   async signin(
-    @Arg('data') data: AuthInput,
+    @Arg('data') data: LoginInputs,
     @Ctx() { req }: Context
   ): Promise<UserResponse> {
     let error: FieldError = checkEmpty(data);
@@ -106,7 +107,6 @@ class AuthResolver {
         to: user.email,
       }).sendResetPassword();
     } catch (err) {
-      console.log(err.response.body);
       Sentry.captureException(err);
     }
 

@@ -22,7 +22,7 @@ export type ComponentWithAs<P, DefaultType extends As> = {
 };
 
 export type ComponentProps<C extends React.ElementType, P> = Omit<
-  React.ComponentPropsWithoutRef<C>,
+  React.ComponentPropsWithRef<C>,
   keyof P
 > & {
   /** HTML tag or component that will be used as root element */

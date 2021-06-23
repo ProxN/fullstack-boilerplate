@@ -10,8 +10,8 @@ import styled, {
   FontSizeProps,
   lineHeight,
   LineHeightProps,
-  margin,
-  MarginProps,
+  space,
+  SpaceProps,
   css,
   th,
 } from '@xstyled/styled-components';
@@ -23,7 +23,7 @@ const TextSystem = compose(
   fontWeight,
   fontSize,
   lineHeight,
-  margin
+  space
 );
 
 export interface TextBaseProps
@@ -32,7 +32,7 @@ export interface TextBaseProps
     TextTransformProps,
     FontSizeProps,
     LineHeightProps,
-    MarginProps {
+    SpaceProps {
   /** color from theme.colors */
   color?: string;
 
@@ -58,9 +58,12 @@ export const TextDiv = styled.div.withConfig({
   shouldForwardProp: (props, validate) =>
     validate(props) && !TextSystem.meta.props.includes(props),
 })<TextBaseProps>`
-  ${TextSystem};
-  color: ${({ color, theme }) =>
-    color ? mode(`${color}.6`, `${color}.4`)(theme.colorMode) : 'inherit'};
+  ${({ color, theme }) => css`
+    color: ${color
+      ? mode(`${color}.6`, `${color}.4`)(theme.colorMode)
+      : 'inherit'};
+  `}
   font-family: ${th('fontFamily')};
   ${({ isLink }) => isLink && LinkStyles}
+  ${TextSystem};
 `;

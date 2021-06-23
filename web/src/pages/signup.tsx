@@ -1,21 +1,104 @@
+import { useRouter } from 'next/router';
+import { Controller, useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import toast from 'react-hot-toast';
+import { useQueryClient } from 'react-query';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { SignupInputs, useSignupMutation, MeQuery } from '@lib/graphql';
+import { client } from '@lib/utility/graphqlClient';
+import { WithNoUser } from '@lib/utility/withNoUser';
 import { Button } from '@components/elements/Button';
 import { TextInput } from '@components/elements/TextInput';
 import { AuthForm } from '@components/templates/AuthForm';
 
+const SignupSchema = yup.object().shape({
+  email: yup
+    .string()
+    .email('You have entered an invalid email address. Please try again.')
+    .required(),
+  password: yup
+    .string()
+    .min(8, 'Password must be at least 8 characters')
+    .required(),
+  name: yup.string().required(),
+});
+
 const SignUp = () => {
+  const router = useRouter();
+  const queryClient = useQueryClient();
+  const { control, handleSubmit } = useForm<SignupInputs>({
+    resolver: yupResolver(SignupSchema),
+  });
+
+  const { mutate, isLoading } = useSignupMutation(client, {
+    onSuccess: (data) => {
+      if (data.signup.error) {
+        toast.error(data.signup.error.message);
+      }
+      if (data.signup.user) {
+        queryClient.setQueryData<MeQuery>(['Me', null], {
+          me: data.signup.user,
+        });
+        router.push('/');
+      }
+    },
+  });
+
+  const onSubmit = (data: SignupInputs) => {
+    mutate(data);
+  };
+
   return (
-    <AuthForm page='signup' title='Sign up.'>
-      <TextInput placeholder='Enter your email' label='Email' />
-      <TextInput
-        placeholder='Enter your password'
-        type='password'
-        label='Password'
+    <AuthForm onSubmit={handleSubmit(onSubmit)} page='signup' title='Sign up.'>
+      <Controller
+        render={({ field, fieldState: { error, invalid } }) => (
+          <TextInput
+            placeholder='Enter your name'
+            label='Name'
+            id='name'
+            error={error?.message}
+            isInvalid={invalid}
+            {...field}
+          />
+        )}
+        name='name'
+        control={control}
       />
-      <Button radius='sm' isPrimary>
+      <Controller
+        render={({ field, fieldState: { error, invalid } }) => (
+          <TextInput
+            placeholder='Enter your email'
+            label='Email'
+            id='email'
+            isInvalid={invalid}
+            error={error?.message}
+            {...field}
+          />
+        )}
+        name='email'
+        control={control}
+      />
+      <Controller
+        render={({ field, fieldState: { error, invalid } }) => (
+          <TextInput
+            placeholder='Enter your password'
+            type='password'
+            label='Password'
+            id='password'
+            error={error?.message}
+            isInvalid={invalid}
+            {...field}
+          />
+        )}
+        name='password'
+        control={control}
+      />
+
+      <Button isLoading={isLoading} type='submit' radius='sm' isPrimary>
         Sign Up
       </Button>
     </AuthForm>
   );
 };
 
-export default SignUp;
+export default WithNoUser(SignUp);

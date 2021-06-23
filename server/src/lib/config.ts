@@ -1,7 +1,7 @@
 export const {
   NODE_ENV = 'development',
   PORT = 5000,
-  CORS_ORIGIN = 'http://localhost:300',
+  CORS_ORIGIN = 'http://localhost:3000',
   DB_HOST = 'localhost',
   DB_NAME = 'test',
   DB_USER = 'postgres',

@@ -19,9 +19,9 @@ class User extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id!: string;
 
-  @Field(() => String, { nullable: true })
-  @Column({ nullable: true })
-  name?: string;
+  @Field()
+  @Column()
+  name!: string;
 
   @Field()
   @Column({ unique: true })

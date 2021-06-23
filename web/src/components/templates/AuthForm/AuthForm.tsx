@@ -34,7 +34,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
 }) => {
   return (
     <Center minH='100vh'>
-      <Box minW={{ xs: '100%', sm: '40rem' }}>
+      <Box w={{ xs: '100%', sm: '40rem' }}>
         <Heading as='h1' size='3xl'>
           {title}
         </Heading>

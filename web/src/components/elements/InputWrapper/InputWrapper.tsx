@@ -35,7 +35,11 @@ const InputWrapper = ({
         </Label>
       )}
       {children}
-      {error && <Text color='red'>{error}</Text>}
+      {error && (
+        <Text color='red' mt={1}>
+          {error}
+        </Text>
+      )}
     </Wrapper>
   );
 };

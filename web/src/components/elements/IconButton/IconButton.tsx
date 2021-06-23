@@ -17,6 +17,8 @@ interface IconButtonProps
 
   /** A label that describes the button */
   ariaLabel: string;
+
+  onClick?: () => void;
 }
 
 const IconButton: React.FC<IconButtonProps> = ({
