@@ -1,31 +1,22 @@
-/* eslint-disable */
+// /* eslint-disable */
 const {
   PHASE_DEVELOPMENT_SERVER,
   PHASE_PRODUCTION_BUILD,
 } = require('next/constants');
 
 module.exports = (phase) => {
-  const isDev = phase === PHASE_DEVELOPMENT_SERVER;
-  const isProd =
+  const IS_DEV = phase === PHASE_DEVELOPMENT_SERVER;
+  const IS_PROD =
     phase === PHASE_PRODUCTION_BUILD && process.env.STAGING !== '1';
-
-  const SENTRY_DSN = '';
-  const API_URL = isProd
-    ? 'http://localhost:5000/graphql'
-    : 'http://localhost:5000/graphql';
-
+  const API_URL = process.env.API_URL;
   const env = {
-    SENTRY_DSN,
     API_URL,
-    isDev,
-    isProd,
+    IS_DEV,
+    IS_PROD,
   };
 
   return {
     env,
-    future: {
-      webpack5: true,
-    },
     webpack(config) {
       config.module.rules.push({
         test: /\.svg$/,

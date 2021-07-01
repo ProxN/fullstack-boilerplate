@@ -6,12 +6,14 @@ import express from 'express';
 import session from 'express-session';
 import { buildSchema } from 'type-graphql';
 import { ApolloServer } from 'apollo-server-express';
-import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import connectRedis from 'connect-redis';
 import Redis from 'ioredis';
 import * as Sentry from '@sentry/node';
 import * as Tracing from '@sentry/tracing';
+import cors from 'cors';
+import helmet from 'helmet';
+import depthLimit from 'graphql-depth-limit';
 import connection from './conn';
 import { resolvers } from './api';
 import authChecker from './lib/authChecker';
@@ -39,6 +41,7 @@ const Main = async () => {
   const redis = new Redis('127.0.0.1:6379');
 
   app.set('trust proxy', 1);
+  app.use(helmet());
   app.use(
     cors({
       origin: [CORS_ORIGIN, 'http://localhost:3000'],
@@ -76,6 +79,7 @@ const Main = async () => {
       res,
       redis,
     }),
+    validationRules: [depthLimit(6)],
   });
 
   apolloServer.applyMiddleware({ app, cors: false });

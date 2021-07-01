@@ -1,5 +1,8 @@
 import 'styled-components';
-import { DefaultTheme as XStyledDefaultTheme } from '@xstyled/styled-components';
+import {
+  ITheme,
+  DefaultTheme as XStyledDefaultTheme,
+} from '@xstyled/styled-components';
 import { Tuple } from '@lib/types/utility-types';
 import { SpaceType } from './space';
 import {
@@ -23,22 +26,24 @@ export type FontSizes =
 
 export type ThemeSize = Record<Size, string | number>;
 
+interface AppTheme extends ITheme, XStyledDefaultTheme {
+  colorMode: 'light' | 'dark';
+  white: string;
+  black: string;
+  primary: string;
+  lineHeight: string;
+  fontFamily: string;
+  colors: Record<string, Tuple<string, 10>>;
+  fontSizes: Record<FontSizes, string | number>;
+  radii: ThemeSize;
+  shadows: ThemeSize;
+  screens: ThemeSize;
+  space: SpaceType;
+  durations: TransitionDuration;
+  timingFunctions: TimingFunctions;
+  transitionProperties: TransitionProperties;
+}
+
 declare module 'styled-components' {
-  export interface DefaultTheme extends XStyledDefaultTheme {
-    colorMode: 'light' | 'dark';
-    white: string;
-    black: string;
-    primary: string;
-    lineHeight: string;
-    fontFamily: string;
-    colors: Record<string, Tuple<string, 10>>;
-    fontSizes: Record<FontSizes, string | number>;
-    radii: ThemeSize;
-    shadows: ThemeSize;
-    screens: ThemeSize;
-    space: SpaceType;
-    durations: TransitionDuration;
-    timingFunctions: TimingFunctions;
-    transitionProperties: TransitionProperties;
-  }
+  export interface DefaultTheme extends AppTheme {}
 }

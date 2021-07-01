@@ -1,7 +1,7 @@
 import { useState } from 'react';
+import { AppProps } from 'next/app';
 import { QueryClientProvider, QueryClient } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import { AppProps } from 'next/app';
 import { Preflight, ThemeProvider } from '@xstyled/styled-components';
 import { Theme } from '@lib/theme';
 import { GlobalStyles } from '@lib/styles';
@@ -35,7 +35,7 @@ const App = (props: AppProps) => {
         <main>
           <Component {...pageProps} />
         </main>
-        {/* <ReactQueryDevtools /> */}
+        <ReactQueryDevtools />
       </QueryClientProvider>
       <Box position='absolute' top={12} right={12}>
         <IconButton
