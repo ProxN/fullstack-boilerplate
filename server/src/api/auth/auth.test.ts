@@ -6,8 +6,8 @@ import User from '../user/user.entity';
 import * as authErros from './auth.errors';
 
 const signupMutation = `
-    mutation Signup($email:String!,$password:String!){
-        signup(data:{email:$email,password:$password}){
+    mutation Signup($email:String!,$password:String!,$name:String!){
+        signup(data:{email:$email,password:$password,name:$name}){
           error{
             field
             message
@@ -67,6 +67,7 @@ describe(desc, () => {
       const user = {
         email: 'test@test.com',
         password: 'testtest',
+        name: 'test test',
       };
       const { data } = await graphqlCall({
         source: signupMutation,
@@ -85,6 +86,7 @@ describe(desc, () => {
         variableValues: {
           email: 'test@test.com',
           password: 'testtest',
+          name: 'test test',
         },
       });
 
@@ -97,6 +99,7 @@ describe(desc, () => {
       const userDB = await User.create({
         email: 'test3@gmail.com',
         password: 'testtest',
+        name: 'test3 test3',
       }).save();
 
       const { data } = await graphqlCall({
@@ -131,6 +134,7 @@ describe(desc, () => {
       const userDB = await User.create({
         email: 'test5@gmail.com',
         password: 'testtest',
+        name: 'test5 test5',
       }).save();
 
       const { resetToken } = userDB.generateResetToken();
@@ -152,6 +156,7 @@ describe(desc, () => {
       const userDB = await User.create({
         email: 'test6@gmail.com',
         password: 'testtest',
+        name: 'test6 test6',
       }).save();
 
       const { resetToken } = userDB.generateResetToken();

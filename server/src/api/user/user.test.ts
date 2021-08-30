@@ -58,6 +58,7 @@ describe(desc, () => {
     const userDB = await User.create({
       email: 'userprofile1@gmail.com',
       password: 'testtest',
+      name: 'userprofile',
     }).save();
 
     const { data } = await graphqlCall({
@@ -76,6 +77,7 @@ describe(desc, () => {
     const userDB = await User.create({
       email: 'userprofile2@gmail.com',
       password: 'testtest',
+      name: 'userprofile2',
     }).save();
 
     const { data } = await graphqlCall({
@@ -92,6 +94,7 @@ describe(desc, () => {
       const userDB = await User.create({
         email: 'userprofile3@gmail.com',
         password: 'testtest',
+        name: 'userprofile3',
       }).save();
 
       const { data } = await graphqlCall({
@@ -110,6 +113,7 @@ describe(desc, () => {
       const userDB = await User.create({
         email: 'userprofile4@gmail.com',
         password: 'testtest',
+        name: 'userprofile4',
       }).save();
 
       const { data } = await graphqlCall({
