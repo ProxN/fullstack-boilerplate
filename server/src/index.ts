@@ -17,6 +17,7 @@ import depthLimit from 'graphql-depth-limit';
 import connection from './conn';
 import { resolvers } from './api';
 import authChecker from './lib/authChecker';
+import { logger } from './lib/logger';
 import {
   CORS_ORIGIN,
   PORT,
@@ -24,6 +25,8 @@ import {
   SESSION_SECRET,
   SENTRY_DSN,
 } from './lib/config';
+
+logger.info('Starting Application');
 
 const Main = async () => {
   await connection();
@@ -82,9 +85,11 @@ const Main = async () => {
     validationRules: [depthLimit(6)],
   });
 
+  await apolloServer.start();
+
   apolloServer.applyMiddleware({ app, cors: false });
 
-  app.listen(PORT, () => console.log(`Server starting at port: ${PORT}`));
+  app.listen(PORT, () => logger.info(`> Ready on http://localhost:${PORT}`));
 };
 
 Main();

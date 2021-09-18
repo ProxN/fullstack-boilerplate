@@ -3,6 +3,7 @@ import path from 'path';
 import * as Sentry from '@sentry/node';
 import { entities } from './api';
 import { DB_HOST, DB_NAME, DB_PASS, DB_USER, IS_PROD } from './lib/config';
+import { logger } from './lib/logger';
 
 const connectDB = async () => {
   await createConnection({
@@ -17,7 +18,7 @@ const connectDB = async () => {
     password: DB_PASS,
     migrations: [path.join(__dirname, './migrations/*.ts')],
   })
-    .then(() => console.log('DB CONNECTED SUCCESSFULY'))
+    .then(() => logger.info('DB CONNECTED SUCCESSFULY'))
     .catch((err) => Sentry.captureException(err));
 };
 

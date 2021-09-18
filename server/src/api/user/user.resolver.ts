@@ -27,7 +27,7 @@ class UserResolver {
       await User.update({ id: req.session.userId }, newUser);
 
       updatedUser = await User.findOne(req.session.userId);
-    } catch (error) {
+    } catch (error: any) {
       if (error.code === '23505') {
         return { error: userErrors.usernameAlreadyExists };
       }

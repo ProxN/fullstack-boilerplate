@@ -48,7 +48,7 @@ class AuthResolver {
       }).save();
 
       req.session.userId = user.id;
-    } catch (err) {
+    } catch (err: any) {
       if (err.code === '23505') {
         if (err.detail.includes('email')) {
           return { error: authErrors.EmailAlreadyExists };
