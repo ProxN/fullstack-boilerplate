@@ -1,6 +1,12 @@
 import styled from '@xstyled/styled-components';
-import { Box } from '../Box';
+import { Box, BoxProps } from '../Box';
 
-export default styled(Box)`
+const FlexBox = styled(Box)`
   display: flex;
 `;
+
+const Flex: React.FC<BoxProps> = (props) => {
+  return <FlexBox {...props} />;
+};
+
+export default Flex;

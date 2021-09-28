@@ -12,6 +12,8 @@ import styled, {
   LineHeightProps,
   space,
   SpaceProps,
+  opacity,
+  OpacityProps,
   css,
   th,
 } from '@xstyled/styled-components';
@@ -23,7 +25,8 @@ const TextSystem = compose(
   fontWeight,
   fontSize,
   lineHeight,
-  space
+  space,
+  opacity
 );
 
 export interface TextBaseProps
@@ -32,7 +35,8 @@ export interface TextBaseProps
     TextTransformProps,
     FontSizeProps,
     LineHeightProps,
-    SpaceProps {
+    SpaceProps,
+    OpacityProps {
   /** color from theme.colors */
   color?: string;
 
