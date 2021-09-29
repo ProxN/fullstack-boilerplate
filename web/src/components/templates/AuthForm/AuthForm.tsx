@@ -45,7 +45,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
             {hideLinks ? (
               ''
             ) : page === 'forgot_password' ? (
-              <Link href='/login'>
+              <Link passHref href='/login'>
                 <Text as='a' isLink>
                   Back to Login
                 </Text>
@@ -54,7 +54,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
               <Center flexDirection='column'>
                 <Text>
                   {info[page].text}
-                  <Link href={info[page].href}>
+                  <Link passHref href={info[page].href}>
                     <Text as='a' isLink>
                       {' '}
                       {info[page].linkText}
@@ -62,7 +62,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
                   </Link>
                 </Text>
                 {page === 'login' && (
-                  <Link href='/forgot_password'>
+                  <Link passHref href='/forgot_password'>
                     <Text as='a' isLink>
                       Forgot Password?
                     </Text>

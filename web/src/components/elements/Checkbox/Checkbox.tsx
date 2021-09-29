@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import { forwardRef } from '@lib/utility/forwardRef';
 import { Icon } from '../Icon';
 import {
   CheckBoxWrapper,
@@ -42,9 +42,7 @@ interface CheckBoxProps extends BaseCheckBoxProps, HTMLInputProps {
   icon?: React.ReactElement;
 }
 
-type CheckBoxRef = HTMLInputElement;
-
-const CheckBox = forwardRef<CheckBoxRef, CheckBoxProps>((props, ref) => {
+const CheckBox = forwardRef<CheckBoxProps, 'input'>((props, ref) => {
   const {
     children,
     iconColor,

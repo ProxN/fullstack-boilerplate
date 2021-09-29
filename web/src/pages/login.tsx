@@ -12,16 +12,18 @@ import { Button } from '@components/elements/Button';
 import { TextInput } from '@components/elements/TextInput';
 import { AuthForm } from '@components/templates/AuthForm';
 
-const LoginSchema = yup.object().shape({
-  email: yup
-    .string()
-    .email('You have entered an invalid email address. Please try again.')
-    .required(),
-  password: yup
-    .string()
-    .min(8, 'Password must be at least 8 characters')
-    .required(),
-});
+const LoginSchema = yup
+  .object({
+    email: yup
+      .string()
+      .email('You have entered an invalid email address. Please try again.')
+      .required(),
+    password: yup
+      .string()
+      .min(8, 'Password must be at least 8 characters')
+      .required(),
+  })
+  .required();
 
 const Login = () => {
   const queryClient = useQueryClient();

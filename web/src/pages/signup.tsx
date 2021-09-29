@@ -11,17 +11,19 @@ import { Button } from '@components/elements/Button';
 import { TextInput } from '@components/elements/TextInput';
 import { AuthForm } from '@components/templates/AuthForm';
 
-const SignupSchema = yup.object().shape({
-  email: yup
-    .string()
-    .email('You have entered an invalid email address. Please try again.')
-    .required(),
-  password: yup
-    .string()
-    .min(8, 'Password must be at least 8 characters')
-    .required(),
-  name: yup.string().required(),
-});
+const SignupSchema = yup
+  .object({
+    email: yup
+      .string()
+      .email('You have entered an invalid email address. Please try again.')
+      .required(),
+    password: yup
+      .string()
+      .min(8, 'Password must be at least 8 characters')
+      .required(),
+    name: yup.string().required(),
+  })
+  .required();
 
 const SignUp = () => {
   const router = useRouter();

@@ -10,15 +10,21 @@ import { TextInput } from '@components/elements/TextInput';
 import { Button } from '@components/elements/Button';
 import { Text } from '@components/elements/Text';
 
-const PasswordSchema = yup.object().shape({
-  email: yup
-    .string()
-    .email('You have entered an invalid email address. Please try again.')
-    .required(),
-});
+interface ForgotPasswordForm {
+  email: string;
+}
+
+const PasswordSchema = yup
+  .object({
+    email: yup
+      .string()
+      .email('You have entered an invalid email address. Please try again.')
+      .required(),
+  })
+  .required();
 
 const ForgotPassword = () => {
-  const { control, handleSubmit } = useForm({
+  const { control, handleSubmit } = useForm<ForgotPasswordForm>({
     resolver: yupResolver(PasswordSchema),
   });
 

@@ -1,4 +1,5 @@
 import 'styled-components';
+import '@xstyled/system';
 import {
   ITheme,
   DefaultTheme as XStyledDefaultTheme,

@@ -10,21 +10,28 @@ import { Button } from '@components/elements/Button';
 import { TextInput } from '@components/elements/TextInput';
 import { AuthForm } from '@components/templates/AuthForm';
 
-const resetPasswordSchema = yup.object().shape({
-  password: yup
-    .string()
-    .min(8, 'Password must be at least 8 characters')
-    .required(),
-  confirmPassword: yup
-    .string()
-    .oneOf([yup.ref('password'), null], 'Passwords must match')
-    .required(),
-});
+interface ResetPasswordData {
+  password: string;
+  confirmPassword: string;
+}
+
+const resetPasswordSchema = yup
+  .object({
+    password: yup
+      .string()
+      .min(8, 'Password must be at least 8 characters')
+      .required(),
+    confirmPassword: yup
+      .string()
+      .oneOf([yup.ref('password'), null], 'Passwords must match')
+      .required(),
+  })
+  .required();
 
 const ResetPassword = () => {
   const router = useRouter();
   const queryClient = useQueryClient();
-  const { control, handleSubmit } = useForm({
+  const { control, handleSubmit } = useForm<ResetPasswordData>({
     resolver: yupResolver(resetPasswordSchema),
   });
 

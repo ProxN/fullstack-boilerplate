@@ -7,6 +7,7 @@ type TupleOf<T, N extends number, R extends unknown[]> = R['length'] extends N
   ? R
   : TupleOf<T, N, [T, ...R]>;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type As<T = any> = React.ElementType<T>;
 
 export type PropsWithAs<T extends As, P> = Omit<
