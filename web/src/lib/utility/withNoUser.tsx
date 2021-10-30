@@ -20,7 +20,7 @@ const WithNoUser = <P extends Record<string, unknown>>(
       router.push(redirect || '/');
     }, [isLoading, router, user]);
 
-    if (isLoading || !user?.me) {
+    if (isLoading || user?.me) {
       return (
         <Center minH='100vh'>
           <Loader />
@@ -31,32 +31,5 @@ const WithNoUser = <P extends Record<string, unknown>>(
     return <Component {...props} />;
   };
 };
-
-// const WithNoUser = <P extends Record<string, unknown>>(
-//   Component: React.ComponentType<P>,
-//   redirect = ''
-// ) => {
-//   return (props: P) => {
-//     const { data: user, isLoading } = useMeQuery(client, undefined, {
-//       staleTime: 1000 * 60 * 60 * 24,
-//     });
-//     const router = useRouter();
-
-//     useEffect(() => {
-//       if (isLoading || !user?.me) return;
-//       router.push(redirect || '/');
-//     }, [isLoading, user]);
-
-//     if (isLoading || user?.me) {
-//       return (
-//         <Center minH='100vh'>
-//           <Loader />
-//         </Center>
-//       );
-//     }
-
-//     return <Component {...props} />;
-//   };
-// };
 
 export { WithNoUser };
