@@ -9,7 +9,7 @@ import { Size } from '@lib/theme';
 import { getColor, transparentize } from '@lib/utility/color';
 import { mode } from '@lib/utility/component';
 
-export interface BaseButtonProps {
+export interface BaseButtonProps extends SpaceProps {
   /**  button size */
   size?: 'sm' | 'md' | 'lg';
 
@@ -42,6 +42,7 @@ const BaseButton = styled.button.withConfig({
   shouldForwardProp: (prop, validate) =>
     validate(prop) && !['radius', 'color'].includes(prop),
 })<BaseButtonProps>`
+  ${space};
   ${({ size }) => size && { ...sizes[size] }};
   ${({ radius, theme }) =>
     radius && css({ borderRadius: theme.radii[radius] })};
@@ -77,7 +78,7 @@ const BaseButton = styled.button.withConfig({
 
   &:focus {
     outline: none;
-    ${system.apply({ ring: 2, ringColor: 'blue.3' })}
+    ${system.apply({ ring: 'default', ringColor: 'blue.3' })}
   }
 
   &:focus:not(:focus-visible) {
@@ -214,7 +215,7 @@ export const LinkButton = styled(BaseButton)<BaseButtonProps>`
 `;
 
 export const ButtonIcon = styled.span<SpaceProps>`
-  ${space}
-  display:flex;
+  ${space};
+  display: flex;
   align-items: center;
 `;

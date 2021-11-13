@@ -1,20 +1,11 @@
 import { useMemo } from 'react';
-import { FlexboxesProps } from '@xstyled/styled-components';
+import { useBreakpoint } from '@xstyled/styled-components';
 import { Size } from '@lib/theme';
 import { SpaceContainer, SpaceBaseProps } from './Space.styles';
 
 export type SpaceSize = Size | number;
 
 interface SpaceProps extends Omit<SpaceBaseProps, 'hSize ' | 'vSize'> {
-  /** Flex align items */
-  alignItems?: FlexboxesProps['alignItems'];
-
-  /** Items directions */
-  flexDirection?: FlexboxesProps['flexDirection'];
-
-  /** Items positions */
-  justifyContent?: FlexboxesProps['justifyContent'];
-
   /**  space Size */
   size?: SpaceSize | SpaceSize[];
 }
@@ -31,10 +22,18 @@ const getSpaceSize = (spaceSize: SpaceSize) => {
   return typeof spaceSize === 'string' ? sizes[spaceSize] : spaceSize || 1;
 };
 
+interface Test {
+  sm: string;
+  xs: string;
+  lg: string;
+  md: string;
+}
+
 const Space: React.FC<SpaceProps> = ({
   children,
   $wrap = false,
   size = 'sm',
+  flexDirection = 'row',
   ...rest
 }) => {
   const [hSize, vSize] = useMemo(
@@ -42,9 +41,21 @@ const Space: React.FC<SpaceProps> = ({
       (Array.isArray(size) ? size : [size, size]).map((el) => getSpaceSize(el)),
     [size]
   );
+  const breakpoint = useBreakpoint();
+
+  const direction =
+    typeof flexDirection === 'object' && breakpoint
+      ? flexDirection[breakpoint as keyof Test]
+      : flexDirection;
 
   return (
-    <SpaceContainer hSize={hSize} vSize={vSize} $wrap={$wrap} {...rest}>
+    <SpaceContainer
+      flexDirection={direction}
+      hSize={hSize}
+      vSize={vSize}
+      $wrap={$wrap}
+      {...rest}
+    >
       {children}
     </SpaceContainer>
   );

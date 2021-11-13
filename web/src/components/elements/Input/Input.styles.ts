@@ -7,13 +7,16 @@ import styled, {
   maxWidth,
   MaxWidthProps,
   compose,
+  space,
+  SpaceProps,
 } from '@xstyled/styled-components';
 import { mode } from '@lib/utility/component';
 
 export interface InputBaseProps
   extends BorderRadiusProps,
     MaxWidthProps,
-    WidthProps {
+    WidthProps,
+    SpaceProps {
   /** Input appearance */
   variant?: 'filled' | 'default' | 'unstyled';
 
@@ -21,7 +24,7 @@ export interface InputBaseProps
   isInvalid?: boolean;
 }
 
-const inputSystem = compose(borderRadius, width, maxWidth);
+const inputSystem = compose(borderRadius, width, maxWidth, space);
 
 const BaseInput = styled.input<InputBaseProps>`
   width: 100%;

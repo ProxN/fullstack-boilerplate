@@ -12,13 +12,17 @@ import styled, {
   MarginTopProps,
   MarginBottomProps,
   FlexDirectionProps,
+  AlignItemsProps,
+  JustifyContentProps,
 } from '@xstyled/styled-components';
 
 export interface SpaceBaseProps
   extends MarginProps,
     MarginTopProps,
     MarginBottomProps,
-    FlexDirectionProps {
+    FlexDirectionProps,
+    AlignItemsProps,
+    JustifyContentProps {
   /** if "true", set flex-wrap:wrap */
   $wrap?: boolean;
 
@@ -43,15 +47,15 @@ export const SpaceContainer = styled.div.withConfig({
     validate(prop) && !SpaceSystem.meta.props.includes(prop),
 })<SpaceBaseProps>`
   display: flex;
-  ${({ $wrap }) => $wrap && css({ flexWrap: $wrap ? 'wrap' : 'nowrap' })}
+  ${({ $wrap }) => $wrap && css({ flexWrap: $wrap ? 'wrap' : 'nowrap' })};
   ${SpaceSystem};
 
   & > :not(style) ~ :not(style) {
-    ${({ flexDirection: direction, hSize }) => {
+    ${({ flexDirection: direction, hSize, vSize }) => {
       if (!hSize) return css``;
       if (direction === 'column') {
         return css`
-          margin-top: ${getSpace(hSize)};
+          margin-top: ${getSpace(`${vSize}`)};
           margin-inline: 0;
           margin-bottom: 0;
         `;
@@ -61,7 +65,7 @@ export const SpaceContainer = styled.div.withConfig({
         margin-inline-end: 0;
         margin-top: 0;
         margin-bottom: 0;
-        margin-inline-start: ${getSpace(hSize)};
+        margin-inline-start: ${getSpace(`${hSize}`)};
       `;
     }}
   }
