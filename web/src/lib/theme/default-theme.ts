@@ -52,6 +52,9 @@ const Theme: DefaultTheme = {
   space,
   durations,
   timingFunctions,
+  states: {
+    ...defaultTheme.states,
+  },
   transitionProperties,
 };
 

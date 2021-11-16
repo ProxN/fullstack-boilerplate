@@ -27,6 +27,10 @@ export type FontSizes =
 
 export type ThemeSize = Record<Size, string | number>;
 
+interface ThemeStates extends Pick<XStyledDefaultTheme, 'states'> {}
+
+type States = ThemeStates['states'];
+
 interface AppTheme extends ITheme, XStyledDefaultTheme {
   colorMode: 'light' | 'dark';
   white: string;
@@ -43,6 +47,12 @@ interface AppTheme extends ITheme, XStyledDefaultTheme {
   durations: TransitionDuration;
   timingFunctions: TimingFunctions;
   transitionProperties: TransitionProperties;
+  states: States & {
+    sm?: null;
+    xs?: null;
+    lg?: null;
+    md?: null;
+  };
 }
 
 declare module '@xstyled/system' {

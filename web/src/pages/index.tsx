@@ -47,7 +47,7 @@ const Index = () => {
           </Box>
         ) : (
           <Box>
-            <Heading textAlign={{}} as='h1' size={{ xs: '3xl', md: '4xl' }}>
+            <Heading as='h1' size={{ xs: '3xl', md: '4xl' }}>
               Welcome to the Fullstack boilerplate
             </Heading>
             <Space mt='1rem' justifyContent='center'>

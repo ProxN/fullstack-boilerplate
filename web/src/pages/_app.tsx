@@ -37,7 +37,7 @@ const App = (props: AppProps) => {
         </main>
         <ReactQueryDevtools />
       </QueryClientProvider>
-      <Box position='absolute' top={12} right={12}>
+      <Box position='absolute' top='2.4rem' right='2.4rem'>
         <IconButton
           variant='ghost'
           size='lg'
