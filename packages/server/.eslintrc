@@ -4,19 +4,14 @@
     "plugins": ["@typescript-eslint", "prettier"],
     "extends": [
       "eslint:recommended",
-      "plugin:@typescript-eslint/eslint-recommended",
-      "plugin:@typescript-eslint/recommended",
-      "prettier"
+      "../../.eslintrc.js"
     ],
     "rules": {
       "@typescript-eslint/no-unused-vars": [
         "error",
         { "argsIgnorePattern": "req|res|next|val" }
       ],
-      "prettier/prettier": "error",
-      "no-console": "warn",
       "prefer-destructuring": ["error", { "object": true, "array": false }],
-      "@typescript-eslint/explicit-module-boundary-types":"off",
       "@typescript-eslint/ban-ts-comment":"off"
     },
     "parserOptions": {

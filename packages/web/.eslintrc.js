@@ -7,9 +7,7 @@ module.exports = {
     'eslint:recommended',
     'next',
     'next/core-web-vitals',
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
+    '../../.eslintrc.js',
   ],
   settings: {
     react: {
@@ -27,17 +25,14 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module',
   },
-  plugins: ['react', '@typescript-eslint', 'import', 'prettier'],
+  plugins: ['react', '@typescript-eslint', 'import'],
   rules: {
-    'no-console': 'warn',
     'jsx-quotes': ['error', 'prefer-single'],
-    '@typescript-eslint/camelcase': 'off',
     'react/prop-types': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
     'react/jsx-props-no-spreading': 'off',
     'react/react-in-jsx-scope': 'off',
     '@next/next/no-document-import-in-page': 'off',
     'react-hooks/rules-of-hooks': 'off',
-    '@typescript-eslint/no-empty-interface': 'off',
+    'react/display-name': 'off',
   },
 };

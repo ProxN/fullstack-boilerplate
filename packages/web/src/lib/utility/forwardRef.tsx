@@ -8,7 +8,7 @@ const forwardRef = <P, C extends React.ElementType>(
   >
 ) => {
   // eslint-disable-next-line prettier/prettier
-  return (React.forwardRef(component) as unknown) as ComponentWithAs<P, C>;
+  return React.forwardRef(component) as unknown as ComponentWithAs<P, C>;
 };
 
 export { forwardRef };
