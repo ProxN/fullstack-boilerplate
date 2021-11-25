@@ -2,6 +2,7 @@
   "extends": [
     "config:base"
   ],
+  "baseBranches":["main"],
   "automerge": true,
   "major": { "automerge": false },
   "packageRules":[
