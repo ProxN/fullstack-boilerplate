@@ -1,0 +1,17 @@
+{
+  "extends": [
+    "config:base"
+  ],
+  "automerge": true,
+  "major": { "automerge": false },
+  "packageRules":[
+    {
+      "matchPackagePatterns":["eslint"],
+      "groupName": "eslint"
+    },
+    {
+      "matchPackagePatterns":"@types/",
+      "groupName":"types"
+    }
+  ]
+}

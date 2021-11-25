@@ -3,7 +3,7 @@ import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { useQueryClient } from 'react-query';
 import toast from 'react-hot-toast';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { useResetPasswordMutation, MeQuery } from '@lib/graphql';
 import { client } from '@lib/utility/graphqlClient';
 import { Button } from '@components/elements/Button';
