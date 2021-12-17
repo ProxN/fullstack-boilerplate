@@ -1,5 +1,5 @@
 import styled, { system, SystemProps } from '@xstyled/styled-components';
-import { ComponentProps } from '@lib/types/utility-types';
+import { forwardRef } from '@lib/utility/forwardRef';
 
 export interface BoxProps extends SystemProps {
   color?: React.HTMLAttributes<HTMLDivElement>['color'];
@@ -10,14 +10,11 @@ const CustomBox = styled.div.withConfig({
   shouldForwardProp: (prop, validate) =>
     validate(prop) && !system.meta.props.includes(prop),
 })<BoxProps>`
-  ${system}
+  ${system};
 `;
 
-const Box = <C extends React.ElementType = 'div'>(
-  props: ComponentProps<C, BoxProps>
-) => {
-  const { children, ...rest } = props;
-  return <CustomBox {...rest}>{children}</CustomBox>;
-};
+const Box = forwardRef<BoxProps, 'div'>((props, ref) => {
+  return <CustomBox ref={ref} {...props} />;
+});
 
 export default Box;
