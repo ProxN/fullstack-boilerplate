@@ -1,9 +1,10 @@
-import React, { createContext, useContext } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import React, { createContext, useContext, useRef } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import { Portal } from '../Portal';
 import { Box } from '../../layout/Box';
 import { IconButton } from '../IconButton';
 import { Icon } from '../Icon';
+import { Overylay, ModalContainer } from './Modal.styles';
 
 const sizes = {
   xs: '27rem',
@@ -18,8 +19,6 @@ interface ModalProps {
   children?: React.ReactNode;
   size?: keyof typeof sizes;
 }
-
-const MotionBox = motion(Box);
 
 const ModalContext = createContext<ModalProps>({ isOpen: false, size: 'md' });
 
@@ -49,18 +48,7 @@ const FadeConfig = {
 
 export const ModalOverylay: React.FC = (props) => {
   return (
-    <MotionBox
-      position='fixed'
-      h='100vh'
-      w='100%'
-      top='0'
-      left='0'
-      backgroundColor='blackAlpha.4'
-      variants={FadeConfig}
-      initial='exit'
-      animate='enter'
-      {...props}
-    />
+    <Overylay variants={FadeConfig} initial='exit' animate='enter' {...props} />
   );
 };
 
@@ -78,10 +66,20 @@ const ScaleFade = {
 };
 
 export const ModalContent: React.FC = ({ children }) => {
-  const { size } = useModalContext();
+  const { size, onClose } = useModalContext();
+  const ref = useRef<HTMLDivElement | null>(null);
+
+  const onOverlayClick = (e: React.MouseEvent) => {
+    if (ref.current !== e.target) return;
+    if (onClose) {
+      onClose();
+    }
+  };
 
   return (
     <Box
+      onClick={onOverlayClick}
+      ref={ref}
       display='flex'
       alignItems='center'
       justifyContent='center'
@@ -91,15 +89,8 @@ export const ModalContent: React.FC = ({ children }) => {
       top='0'
       left='0'
     >
-      <MotionBox
-        display='flex'
-        flexDirection='column'
-        position='relative'
+      <ModalContainer
         maxW={size ? sizes[size] : sizes.md}
-        backgroundColor='#fff'
-        w='100%'
-        borderRadius='xs'
-        boxShadow='xs'
         minH={size === 'full' ? '100vh' : ''}
         variants={ScaleFade}
         animate='enter'
@@ -107,7 +98,7 @@ export const ModalContent: React.FC = ({ children }) => {
         initial='exit'
       >
         {children}
-      </MotionBox>
+      </ModalContainer>
     </Box>
   );
 };

@@ -1,14 +1,21 @@
 import React from 'react';
-import { ComponentWithAs, PropsWithAs, As } from '../types/utility-types';
+import {
+  ComponentWithAs,
+  ExtendableProps,
+  As,
+  PropsOf,
+} from '../types/utility-types';
 
-const forwardRef = <P, C extends React.ElementType>(
+const forwardRef = <P extends object, C extends React.ElementType>(
   component: React.ForwardRefRenderFunction<
     unknown,
-    PropsWithAs<C, P> & { as?: As }
+    ExtendableProps<PropsOf<C>, P> & {
+      as?: As;
+    }
   >
 ) => {
-  // eslint-disable-next-line prettier/prettier
-  return React.forwardRef(component) as unknown as ComponentWithAs<P, C>;
+  // prettier-ignore
+  return (React.forwardRef(component) as unknown) as ComponentWithAs<P, C>;
 };
 
 export { forwardRef };

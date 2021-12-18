@@ -10,7 +10,7 @@ const CustomBox = styled.div.withConfig({
   shouldForwardProp: (prop, validate) =>
     validate(prop) && !system.meta.props.includes(prop),
 })<BoxProps>`
-  ${system};
+  ${system}
 `;
 
 const Box = forwardRef<BoxProps, 'div'>((props, ref) => {
