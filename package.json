@@ -4,10 +4,10 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "start:server":"cd packages/server && npm run start",
-    "build:server":"cd packages/server && npm run build",
+    "start:server": "cd packages/server && npm run start",
+    "build:server": "cd packages/server && npm run build",
     "lint": "lerna run lint",
-    "typecheck":"lerna run typecheck",
+    "typecheck": "lerna run typecheck",
     "prepare": "husky install"
   },
   "devDependencies": {
